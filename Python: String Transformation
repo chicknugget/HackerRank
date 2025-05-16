@@ -1,0 +1,43 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+#
+# Complete the 'transformSentence' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts STRING sentence as parameter.
+#
+
+def transformSentence(sentence):
+    words=sentence.split()
+    new_sentence=[]
+    for word in words:
+        new_word=word[0]
+        for i in range(1, len(word)):
+            precede=word[i-1]
+            succeed=word[i]
+            if precede.lower()<succeed.lower():
+                new_word+=succeed.upper()
+            elif precede.lower()>succeed.lower():
+                new_word+=succeed.lower()
+            else:
+                new_word+=succeed
+        new_sentence.append(new_word)
+    return " ".join(new_sentence)
+                
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    sentence = input()
+
+    result = transformSentence(sentence)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
